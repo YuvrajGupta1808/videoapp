@@ -8,11 +8,11 @@ Please follow the instructions below and fill in the information requested when 
 
 ## Student Information
 
-|               | Information   |
-|:-------------:|:-------------:|
-| Student Name  | name-here     |
-| Student ID    | id-here       |
-| Student Email | email-here    |
+|               | Information    |
+|:-------------:|:--------------:| 
+| Student Name  | Yuvraj Gupta   |
+| Student ID    | 922933190      |
+| Student Email | ygupta@sfsu.edu|
 
 
 
