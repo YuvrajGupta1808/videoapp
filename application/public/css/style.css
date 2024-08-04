@@ -38,6 +38,7 @@ nav ul {
   padding: 0;
   display: flex;
   gap: 30px; /* Adjust gap here */
+  align-items: center; /* Center align items */
 }
 
 nav ul li {
@@ -59,6 +60,39 @@ nav ul li a:hover,
 nav ul li a.active {
   background-color: #004494;
   border-radius: 5px;
+}
+
+/* Search Form Styles */
+.nav-search-form {
+  display: flex;
+  align-items: center;
+}
+
+.nav-search-form input[type="text"] {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 5px;
+}
+
+.nav-search-form button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-search-form button:hover {
+  color: #004494;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.nav-search-form button i {
+  display: inline-block;
 }
 
 .container {

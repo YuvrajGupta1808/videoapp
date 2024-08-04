@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <title>{{title}}</title>
+</head>
+<body>
+  <section>
+    <h2>Welcome to your Dashboard, {{user.username}}</h2>
+    <p>This is a protected route that only authenticated users can see.</p>
+  <section>
+    <h2>User Profile</h2>
+    <p><strong>Username:</strong> {{user.username}}</p>
+    <p><strong>Email:</strong> {{user.email}}</p>
+    <p><strong>Member Since:</strong> {{user.createdAt}}</p>
+  </section>    <br>
+    <a href="/users/logout">Logout</a>
+  </section>
+</body>
+</html>

@@ -1,63 +1,79 @@
-const createError = require("http-errors");
 const express = require("express");
-const favicon = require('serve-favicon');
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const handlebars = require("express-handlebars");
+const exphbs = require("express-handlebars");
+const session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
+const pool = require("./config/database");
+
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
 const app = express();
 
+// Passport Config
+require("./config/passport")(passport);
+
+// Set up Handlebars
 app.engine(
   "hbs",
-  handlebars({
-    layoutsDir: path.join(__dirname, "views/layouts"), //where to look for layouts
-    partialsDir: path.join(__dirname, "views/partials"), // where to look for partials
-    extname: ".hbs", //expected file extension for handlebars files
-    defaultLayout: "layout", //default layout for app, general template for all pages in app
-    helpers: {}, //adding new helpers to handlebars for extra functionality
+  exphbs({
+    extname: ".hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "views/layouts"),
+    partialsDir: path.join(__dirname, "views/partials"),
   })
 );
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
 
-
+// Middleware
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
 
-app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use("/public", express.static(path.join(__dirname, "public")));
+// Express session
+app.use(
+  session({
+    secret: "secret",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
-app.use("/", indexRouter); // route middleware from ./routes/index.js
-app.use("/users", usersRouter); // route middleware from ./routes/users.js
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
+// Connect flash
+app.use(flash());
 
-/**
- * Catch all route, if we get to here then the 
- * resource requested could not be found.
- */
-app.use((req,res,next) => {
-  next(createError(404, `The route ${req.method} : ${req.url} does not exist.`));
-})
-  
-
-/**
- * Error Handler, used to render the error html file
- * with relevant error information.
- */
-app.use(function (err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = err;
-  console.log(err);
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
+// Global variables
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  res.locals.user = req.user || null;
+  next();
 });
+
+// Routes
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
+
+// Sync Database
+pool
+  .getConnection()
+  .then((connection) => {
+    console.log("Database connected");
+    connection.release();
+  })
+  .catch((err) => {
+    console.error("Database connection failed:", err);
+  });
 
 module.exports = app;
