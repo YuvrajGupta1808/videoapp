@@ -8,29 +8,27 @@
     <title>{{title}}</title>
   </head>
   <body>
-    <section>
-      <h2>Video Post Details</h2>
-      <p><strong>Title:</strong> Sample Video Post</p>
-      <br />
-      <p><strong>Author:</strong> Yuvraj Gupta</p>
-      <br />
-      <p><strong>Created At:</strong> 2024-06-01</p>
-      <br />
-      <video controls>
-        <source src="sample-video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <br />
-      <section>
-        <h3>Comments</h3>
-        <p>No comments yet. Be the first to comment!</p>
-        <br />
-        <form action="#" method="post">
-          <label for="comment">Add a comment:</label>
-          <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
-          <input type="submit" value="Submit Comment" />
+    <div class="container">
+      <h2>{{post.title}}</h2>
+      <div class="video-container">
+        <video src="{{post.video}}" controls></video>
+      </div>
+      <p>{{post.description}}</p>
+      <h3>Comments</h3>
+      <div class="comments">
+        {{#each comments}}
+          <div class="comment">
+            <p>{{this.text}}</p>
+            <small>Posted on {{this.created_at}}</small>
+          </div>
+        {{/each}}
+      </div>
+      {{#if user}}
+        <form action="/posts/{{post.id}}/comment" method="POST" class="comment-form">
+          <textarea name="text" required></textarea>
+          <button type="submit">Comment</button>
         </form>
-      </section>
-    </section>
+      {{/if}}
+    </div>
   </body>
 </html>

@@ -1,10 +1,14 @@
 <nav>
   <ul>
     <li><a href="/">Video App</a></li>
-    <li><a href="/login">Login</a></li>
+    {{#if isLoggedIn}}
+        <li><a href="/users/logout">LogOut</a></li>
+    {{else}}
+        <li><a href="/login">Login</a></li>
+    {{/if}}    
     <li><a href="/register">Register</a></li>
     <li><a href="/postvideo">Post Video</a></li>
-    <li><a href="/viewpost">View Post</a></li>
+    <!--<li><a href="/viewpost">View Post</a></li>-->
     <li class="nav-search">
       <form action="/search" method="GET" class="nav-search-form">
         <input type="text" name="query" placeholder="Search..." />

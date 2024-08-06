@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Search Results</h2>
+  {{#if error_msg}}
+    <div class="alert alert-danger">{{error_msg}}</div>
+  {{/if}}
+  <div class="video-thumbnails">
+    {{#each posts}}
+      <div class="video-thumbnail">
+        <a href="/posts/{{this.id}}">
+          <img src="https://img.youtube.com/vi/{{this.video_url}}/0.jpg" alt="{{this.title}}">
+          <h3>{{this.title}}</h3>
+        </a>
+        <p>{{this.description}}</p>
+      </div>
+    {{/each}}
+  </div>
+</div>
