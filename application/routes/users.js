@@ -72,14 +72,14 @@ router.get("/login", (req, res) => {
 
 // Login Handle
 router.post("/login", (req, res, next) => {
-  console.log("POST /login with body:", req.body);
+  //console.log("POST /login with body:", req.body);
   passport.authenticate("local", (err, user, info) => {
     if (err) {
-      console.error("Error during authentication:", err);
+      //console.error("Error during authentication:", err);
       return next(err);
     }
     if (!user) {
-      console.log("Authentication failed:", info.message);
+      //console.log("Authentication failed:", info.message);
       req.flash("error_msg", info.message);
       return res.redirect("/users/login");
     }
@@ -88,7 +88,7 @@ router.post("/login", (req, res, next) => {
         console.error("Error during login:", err);
         return next(err);
       }
-      console.log("Authentication successful, redirecting to /dashboard");
+      //console.log("Authentication successful, redirecting to /dashboard");
       return res.redirect("/dashboard");
     });
   })(req, res, next);

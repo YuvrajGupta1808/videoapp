@@ -1,22 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="/css/style.css">
   <title>{{title}}</title>
 </head>
+
 <body>
-  <section>
-    <h2>Welcome to your Dashboard, {{user.username}}</h2>
-    <p>This is a protected route that only authenticated users can see.</p>
-  <section>
-    <h2>User Profile</h2>
-    <p><strong>Username:</strong> {{user.username}}</p>
-    <p><strong>Email:</strong> {{user.email}}</p>
-    <p><strong>Member Since:</strong> {{user.createdAt}}</p>
-  </section>    <br>
-    <a href="/users/logout">Logout</a>
+  <section class="dashboard-section">
+    <div class="dashboard-header">
+      <h2>Welcome to your Dashboard, {{user.username}}</h2>
+      <p>This is a protected route that only authenticated users can see.</p>
+    </div>
+
+    <div class="profile-section">
+      <h2>User Profile</h2>
+      <p><strong>Username:</strong> {{user.username}}</p>
+      <p><strong>Email:</strong> {{user.email}}</p>
+      <p><strong>Member Since:</strong> {{user.createdAt}}</p>
+    </div>
+
+    <div class="posts-section">
+      <h2>Your Posts</h2>
+      {{#if posts.length}}
+      <ul class="posts-list">
+        {{#each posts}}
+        <li class="post-item">
+          <div class="post-info">
+            <strong>{{this.title}}</strong>
+            <p>{{this.description}}</p>
+          </div>
+          <div class="post-actions">
+            <a href="/viewpost/{{this.id}}" class="view-post-link">View Post</a>
+            <form action="/posts/{{this.id}}/delete" method="POST">
+              <button type="submit" class="delete-post-btn">Delete</button>
+            </form>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+      {{else}}
+      <p>You have not made any posts yet.</p>
+      {{/if}}
+    </div>
   </section>
 </body>
+
 </html>

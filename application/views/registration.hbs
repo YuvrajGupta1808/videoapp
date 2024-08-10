@@ -1,37 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <section>
-      <h2>Registration Form</h2>
-      {{#if errors}}
-      {{#each errors}}
-        <div class="error">{{this.msg}}</div>
-      {{/each}}
-      {{/if}}
-      <form action="/users/register" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-        <label for="confirmpassword">Confirm Password:</label>
-        <input type="password" id="confirmpassword" name="confirmpassword" required />
-        <label>
-          <input type="checkbox" name="age" required /> I am 13+ years old
-        </label>
-        <label>
-          <input type="checkbox" name="tos" required /> I accept the
-          <a href="#">TOS</a> and <a href="#">Privacy Rules</a>
-        </label>
-        <input type="submit" value="Register" />
-      </form>
-    </section>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <title>{{title}}</title>
+</head>
+
+<body>
+  <section>
+    <h2>Registration Form</h2>
+    {{#if errors}}
+    {{#each errors}}
+    <div class="error">{{this.msg}}</div>
+    {{/each}}
+    {{/if}}
+    <form action="/users/register" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required />
+      <label for="confirmpassword">Confirm Password:</label>
+      <input type="password" id="confirmpassword" name="confirmpassword" required />
+      <label>
+        <input type="checkbox" name="age" required /> I am 13+ years old
+      </label>
+      <label>
+        <input type="checkbox" name="tos" required /> I accept the
+        <a href="#">TOS</a> and <a href="#">Privacy Rules</a>
+      </label>
+      <input type="submit" value="Register" />
+    </form>
+    <br>
+  </section>
+</body>
+
 </html>

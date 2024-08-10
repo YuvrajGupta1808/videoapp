@@ -1,34 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <script defer src="/js/jsfile.js"></script>
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <div class="container">
-      <h2>{{post.title}}</h2>
-      <div class="video-container">
-        <video src="{{post.video}}" controls></video>
-      </div>
-      <p>{{post.description}}</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <script defer src="/js/jsfile.js"></script>
+  <title>{{title}}</title>
+</head>
+
+<body>
+  <div class="video-title">
+    <h2>{{post.title}}</h2>
+  </div>
+  <div class="video-container">
+    <video src="{{post.video}}" controls></video>
+  </div>
+  <p>{{post.description}}</p>
+  <div class="content-container">
+    <div class="comments-section">
       <h3>Comments</h3>
       <div class="comments">
         {{#each comments}}
-          <div class="comment">
-            <p>{{this.text}}</p>
-            <small>Posted on {{this.created_at}}</small>
-          </div>
+        <div class="comment">
+          <p>{{this.text}}</p>
+          <small>Posted by {{this.username}} on {{this.created_at}}</small>
+        </div>
         {{/each}}
       </div>
-      {{#if user}}
-        <form action="/posts/{{post.id}}/comment" method="POST" class="comment-form">
-          <textarea name="text" required></textarea>
-          <button type="submit">Comment</button>
-        </form>
+      {{#if isloggedin}}
+      <form action="/posts/{{post.id}}/comment" method="POST" class="comment-form">
+        <textarea name="text" required></textarea>
+        <button type="submit">Comment</button>
+      </form>
       {{/if}}
     </div>
-  </body>
+    <div class="likes-section">
+      <h3>Likes</h3>
+      <p>{{likes}} likes</p>
+      {{#if isloggedin}}
+      <form action="/posts/{{post.id}}/like" method="POST">
+        {{#if userHasLiked}}
+        <button type="submit">Unlike</button>
+        {{else}}
+        <button type="submit">Like</button>
+        {{/if}}
+      </form>
+      {{/if}}
+    </div>
+  </div>
+</body>
+
 </html>

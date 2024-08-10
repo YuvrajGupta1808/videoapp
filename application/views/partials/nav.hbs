@@ -2,18 +2,21 @@
   <ul>
     <li><a href="/">Video App</a></li>
     {{#if isLoggedIn}}
-        <li><a href="/users/logout">LogOut</a></li>
+    <li><a href="/users/logout">LogOut</a></li>
+    <li><a href="/dashboard">Dashboard</a></li>
     {{else}}
-        <li><a href="/login">Login</a></li>
-    {{/if}}    
+    <li><a href="/login">Login</a></li>
     <li><a href="/register">Register</a></li>
+    {{/if}}
     <li><a href="/postvideo">Post Video</a></li>
     <!--<li><a href="/viewpost">View Post</a></li>-->
     <li class="nav-search">
       <form action="/search" method="GET" class="nav-search-form">
-        <input type="text" name="query" placeholder="Search..." />
-        </li><li>
-        <button type="submit"><i class="fas fa-search"></i></button></li>
-      </form>
+        <input type="text" name="query" placeholder="Search..." required>
+    </li>
+    <li>
+      <button type="submit"><i class="fas fa-search"></i></button>
+    </li>
+    </form>
   </ul>
 </nav>

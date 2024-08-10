@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <script defer src="/js/jsfile.js"></script>
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <section>
-      <section>
-        <div id="photoContainer"></div>
-        <div id="photoCount"></div>
-      </section>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <script defer src="/js/jsfile.js"></script>
+  <title>{{title}}</title>
+</head>
+
+<body>
+  <section class="intro-section">
+    <div class="intro-text">
       <p>Our mission is to provide a seamless experience for video sharing and viewing. Enjoy your stay!</p>
-    </section>
-  </body>
+    </div>
+    <div class="posts-container">
+      {{#each posts}}
+      <div class="post">
+        <a href="/viewpost/{{this.id}}" class="post-link">
+          <div class="thumbnail-wrapper">
+            <img src="{{this.thumbnail}}" alt="{{this.title}}" class="post-thumbnail" />
+            <div class="like-count">
+              <i class="fa-solid fa-thumbs-up"></i> {{this.likes}}
+            </div>
+          </div>
+          <h3 class="post-title">{{this.title}}</h3>
+          <p class="post-description">{{this.description}}</p>
+        </a>
+      </div>
+      {{/each}}
+    </div>
+  </section>
+</body>
+
 </html>

@@ -9,7 +9,7 @@ module.exports = function (passport) {
       { usernameField: "username" },
       async (username, password, done) => {
         try {
-          console.log("Attempting to find user with username:", username);
+          //console.log("Attempting to find user with username:", username);
           const [rows] = await pool.query(
             "SELECT * FROM users WHERE username = ?",
             [username]
@@ -23,18 +23,18 @@ module.exports = function (passport) {
           }
 
           const user = rows[0];
-          console.log("User found:", user);
+          //console.log("User found:", user);
 
           const isMatch = await bcrypt.compare(password, user.password);
           if (isMatch) {
-            console.log("Password match for user:", username);
+            //console.log("Password match for user:", username);
             return done(null, user);
           } else {
-            console.log("Password incorrect for user:", username);
+            //console.log("Password incorrect for user:", username);
             return done(null, false, { message: "Password incorrect" });
           }
         } catch (err) {
-          console.error("Error during authentication:", err);
+          //console.error("Error during authentication:", err);
           return done(err);
         }
       }
